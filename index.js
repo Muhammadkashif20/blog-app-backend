@@ -1,4 +1,7 @@
 import express from "express"
+import { setDefaultResultOrder } from "dns";
+setDefaultResultOrder("ipv4first");
+
 const PORT=4000
 const app=express();
 import "dotenv/config"
@@ -6,7 +9,7 @@ import cors from "cors"
 import blogRouter from "./routers/blogs.js"
 import mongoose from "mongoose"
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODBURI, { family: 4 })
 .then(()=>{
 	console.log("Mongodb Connected Successfully")
 })

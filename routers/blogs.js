@@ -19,8 +19,10 @@ router.post("/addBlog",	async (req, res) => {
 	const { title, description, image } = req.body;
 	try{
 		let newBlog=new Blog({ ...req.body })
-		await newBlog.save()
-		res.status(200).json({ message: "Blog added successfully" });
+		const savedBlog = await newBlog.save()
+		console.log("savedBlog", savedBlog)
+		console.log("req.body", req.body)
+		res.status(200).json({ message: "Blog added successfully", blog: savedBlog });
 	}
 	catch (error) {
 		res.status(500).json({ error: "Failed to add Blog" });
