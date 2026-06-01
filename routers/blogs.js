@@ -1,7 +1,8 @@
 import express from "express"
 const router = express.Router();
 import Blog from "../models/Blogs.js"
-
+import cors from "cors"
+router.use(cors())
 // Get Blogs
 router.get("/getBlogs",async (req, res) => {
 	const { Blogs } = req.query;
