@@ -29,11 +29,31 @@ router.post("/addBlog",	async (req, res) => {
 	}
 })
 
-router.put("/updateBlog/:id", (req, res) => {
-	res.send("updated blog successfully")
+// Update Blogs
+router.put("/updateBlog/:id", async (req, res) => {
+	const {id}=req.params;
+	const { title, description, image } = req.body;
+	try {
+		const updatedBlog=await Blog.findByIdAndUpdate(id,{...req.body}, { new: true })
+		console.log("updatedBlog", updatedBlog)
+		res.status(200).json({ message: "Blog updated successfully", blog: updatedBlog });
+	}
+	catch (error) {
+		res.status(500).json({ error: "Failed to update Blog" });
+	}
 })
-router.delete("/deleteBlog/:id", (req, res) => {
-	res.send("deleted blog successfully")
+
+// Delete Blogs
+router.delete("/deleteBlog/:id", async (req, res) => {
+	const {id}=req.params;
+	try {
+		const deletedBlog=await Blog.findByIdAndDelete(id)
+		console.log("deletedBlog=>", deletedBlog)
+		res.status(200).json({ message: "Blog deleted successfully", blog: deletedBlog });
+	}
+	catch (error) {
+		res.status(500).json({ error: "Failed to delete Blog" });
+	}
 })
 
 export default router;
