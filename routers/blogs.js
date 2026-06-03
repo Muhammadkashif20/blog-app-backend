@@ -15,6 +15,19 @@ router.get("/getBlogs",async (req, res) => {
 	}
 })
 
+// get Single Blog
+router.get("/getSingleBlog/:id",async (req, res) => {
+	const { id } = req.params;
+	try{
+		 const getSingleBlog = await Blog.findById(id)
+		 res.status(200).json(getSingleBlog)
+		 console.log("getSingleBlog=>", getSingleBlog)
+	}
+	catch (error) {
+		res.status(500).json({ error: "Failed to fetch Get Single Blog" });
+	}
+});
+
 // Add Blogs
 router.post("/addBlog",	async (req, res) => {
 	const { title, description, image } = req.body;
