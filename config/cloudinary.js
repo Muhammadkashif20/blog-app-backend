@@ -7,4 +7,4 @@ cloudinary.config({
   cloudinary_url: process.env.CLOUDINARY_URL,
 });
 
-export default cloudinary; 
+export default cloudinary;
